@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import "./App.css";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Form,
+  OverlayTrigger,
+  Row,
+  Tooltip,
+} from "react-bootstrap";
 
 function App() {
   const [input, setInput] = useState("");
@@ -18,7 +27,7 @@ function App() {
   return (
     <div className="App">
       <Container className="form-container">
-        <Row>
+        <Row className="around">
           <Col>
             <Form
               onSubmit={(e) => {
@@ -28,6 +37,7 @@ function App() {
             >
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Логин</Form.Label>
+
                 <Form.Control
                   type="text"
                   placeholder="введите электронной почты"
@@ -59,21 +69,40 @@ function App() {
                   }}
                 />
               </Form.Group>
-              <Button
-                variant="primary"
-                type="submit"
-                disabled={
-                  input.length === 0 ||
-                  password.length === 0 ||
-                  checkbox === false
-                    ? true
-                    : false
+              <OverlayTrigger
+                show={!sucessfullLogIn}
+                placement="right"
+                trigger="hover"
+                overlay={
+                  <Tooltip id="tooltip-disabled">
+                    Пожалуйста, введите логин и пароль
+                  </Tooltip>
                 }
               >
-                Войти
-              </Button>
+                <span className="d-inline-block">
+                  <Button
+                    variant={sucessfullLogIn ? "btn btn-success" : "primary"}
+                    type="submit"
+                    disabled={
+                      input.length === 0 ||
+                      password.length === 0 ||
+                      checkbox === false
+                        ? true
+                        : false
+                    }
+                  >
+                    Войти
+                  </Button>
+                </span>
+              </OverlayTrigger>
             </Form>
-            {sucessfullLogIn && "You have successfully log in"}
+            {sucessfullLogIn && (
+              <div>
+                <Alert variant="success">
+                  <Alert.Heading>You are Login!</Alert.Heading>
+                </Alert>
+              </div>
+            )}
           </Col>
         </Row>
       </Container>
