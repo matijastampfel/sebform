@@ -9,26 +9,28 @@ function App() {
   const [sucessfullLogIn, setSucessfullLogIn] = useState(false);
 
   const logIn = () => {
-    setSucessfullLogIn(true)
-    setInput("")
-    setPassword("")
-    setCheckbox(false)
-
-  }
-
-
+    setSucessfullLogIn(true);
+    setInput("");
+    setPassword("");
+    setCheckbox(false);
+  };
 
   return (
     <div className="App">
       <Container className="form-container">
         <Row>
           <Col>
-            <Form onSubmit={(e) => {logIn(); e.preventDefault();}}>
+            <Form
+              onSubmit={(e) => {
+                logIn();
+                e.preventDefault();
+              }}
+            >
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Log In</Form.Label>
+                <Form.Label>Логин</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter email"
+                  placeholder="введите электронной почты"
                   value={input}
                   onChange={(e) => {
                     setInput(e.target.value);
@@ -37,10 +39,10 @@ function App() {
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>Пароль</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Password"
+                  placeholder="Пароль"
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
@@ -68,7 +70,7 @@ function App() {
                     : false
                 }
               >
-                Отправить
+                Войти
               </Button>
             </Form>
             {sucessfullLogIn && "You have successfully log in"}
